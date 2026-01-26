@@ -42,6 +42,7 @@ El toolkit se compone de 4 scripts independientes que cubren todo el flujo de tr
 ```bash
 git clone [https://github.com/tu-usuario/ogg-audio-toolkit.git](https://github.com/tu-usuario/ogg-audio-toolkit.git)
 cd ogg-audio-toolkit
+```
 
 2. Instalar dependencias de Python
 
@@ -56,41 +57,35 @@ Los scripts están diseñados para ser interactivos por terminal. Simplemente ej
 
 Ejemplo de flujo de trabajo:
 
-    Tienes una carpeta llena de .wav y .mp3. Ejecutas el conversor:
-    Bash
-
+Tienes una carpeta llena de .wav y .mp3. Ejecutas el conversor:
+Bash
 python converter-ogg.py
+
 # (Ingresas la ruta de tu carpeta)
 
 Ahora separas los originales de los nuevos OGG:
 Bash
 
 python separate-ogg-files.py
+
 # (Los OGG se moverán solos a una carpeta /ogg)
 
 Comprimes los OGG para web (forzando a que pesen menos de 1MB):
 Bash
 
-    python ogg-compressor-max.py
-    # (Ingresas la ruta de entrada /ogg y una nueva de salida)
+python ogg-compressor-max.py
+
+# (Ingresas la ruta de entrada /ogg y una nueva de salida)
 
 ⚠️ Notas Técnicas y Limitaciones
 
-    FFmpeg PATH: Si obtienes el error FileNotFoundError: [WinError 2] El sistema no puede encontrar el archivo especificado, significa que Python no encuentra ffmpeg. Asegúrate de descargarlo e incluirlo en las Variables de Entorno de Windows/Linux.
+FFmpeg PATH: Si obtienes el error FileNotFoundError: [WinError 2] El sistema no puede encontrar el archivo especificado, significa que Python no encuentra ffmpeg. Asegúrate de descargarlo e incluirlo en las Variables de Entorno de Windows/Linux.
 
-    Límite de Bitrate (ogg-compressor-max.py): Si intentas comprimir un audio de 10 minutos para que pese 1 MB, el script bajará el bitrate al límite del codec Vorbis (48 kbps). El audio se escuchará "robotizado". Úsalo con criterio según la duración del audio.
+Límite de Bitrate (ogg-compressor-max.py): Si intentas comprimir un audio de 10 minutos para que pese 1 MB, el script bajará el bitrate al límite del codec Vorbis (48 kbps). El audio se escuchará "robotizado". Úsalo con criterio según la duración del audio.
 
-    No-Destructivo: Ninguno de los scripts borra los archivos originales (excepto el organizador que los mueve de carpeta). Las conversiones generan nuevos archivos.
-
+No-Destructivo: Ninguno de los scripts borra los archivos originales (excepto el organizador que los mueve de carpeta). Las conversiones generan nuevos archivos.
 ⚖️ Licencia y Créditos
 
 Este proyecto utiliza librerías de código abierto como pydub y el potente motor de procesamiento multimedia FFmpeg.
 
-Ideal para optimización de assets en Godot, Unity, Unreal Engine y Desarrollo Web.
-
-
----
-
-### Un consejo extra para este proyecto:
-Como depende fuertemente de **FFmpeg**, te sugiero que en la carpeta de este proyecto incluyas un pequeño archivo de texto (ej. `INSTALL_FFMPEG.md`) con el enlace oficial de descarga ([https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)), ya que es el error #1 que tendrán otros desarrolladores al intentar usar tus scripts en computadoras nuevas. ¿Te gustaría que redacte ese pequeño archivo de instrucciones también?
-```
+Ideal para optimización de assets en Minecraft Texturepacks, Godot, Unity, Unreal Engine y Desarrollo Web.
