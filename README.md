@@ -1,4 +1,6 @@
-# 🎧 OMEGA Audio Converter (Unified Suite)
+# THIS PROJECT IS ON BETA YET - Be careful
+
+🎧 OMEGA Audio Converter (Unified Suite)
 
 > **Una suite profesional de escritorio para conversión masiva, compresión y visualización de ondas de audio, optimizada para OGG Vorbis (Videojuegos y Web).**
 
