@@ -286,7 +286,6 @@ class OmegaAudioGUI:
                 lbl_status.config(text=f"Convirtiendo: {item.name}")
                 prog_win.update()
 
-                # Definir subcarpetas si está activado
                 dest_dir = out_dir
                 if organize:
                     dest_dir = os.path.join(out_dir, "ogg")
@@ -295,20 +294,39 @@ class OmegaAudioGUI:
                 base_name = os.path.splitext(item.name)[0]
                 out_path = os.path.join(dest_dir, f"{base_name}.ogg")
 
-                # Comando FFmpeg para OGG Vorbis
+                # Convertimos el Bitrate del slider a escala de calidad -q (Vorbis prefiere esto)
+                # 32k -> -1, 96k -> 2, 128k -> 4, 192k -> 6, 320k -> 9
+                bitrate_val = self.var_bitrate.get()
+                q_scale = round((bitrate_val / 32) - 1)
+                q_scale = max(-1, min(10, q_scale)) 
+
+                # --- COMANDO DE ALTA COMPATIBILIDAD ---
                 cmd = [
                     "ffmpeg", "-y", "-i", item.path,
-                    "-acodec", "libvorbis",
-                    "-b:a", f"{target_kbps}k",
-                    "-ac", channels,
+                    "-vn", "-sn", "-dn",         # Elimina Video, Subtítulos y Datos (carátulas)
+                    "-map_metadata", "-1",       # Limpia metadatos que causan errores
+                    "-map", "0:a:0",             # Fuerza SOLO la primera pista de audio
+                    "-c:a", "libvorbis",         # Codificador oficial
+                    "-q:a", str(q_scale),        # Usa Calidad en lugar de Bitrate (más estable)
+                    "-ac", str(channels),        # Canales (1 o 2)
+                    "-ar", "44100",              # Frecuencia estándar para Minecraft
                     out_path
                 ]
 
+                # Imprime el comando en consola para que veas qué está haciendo exactamente
+                print(f"DEBUG: Ejecutando comando: {' '.join(cmd)}")
+
                 try:
-                    subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                    success += 1
+                    # Ejecución con captura de errores completa
+                    proc = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8')
+                    
+                    if proc.returncode == 0 and os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+                        success += 1
+                    else:
+                        print(f"❌ FALLÓ {item.name}. Error:\n{proc.stderr}")
+                        
                 except Exception as e:
-                    print(f"Error en {item.name}: {e}")
+                    print(f"❌ Error de sistema: {e}")
 
                 p_bar['value'] = i + 1
                 prog_win.update()

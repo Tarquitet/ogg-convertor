@@ -1,5 +1,7 @@
 # 🛠️ Guía de Instalación de FFmpeg
 
+**Idioma:** 🇪🇸 Español | 🇬🇧 [English](INSTALL_FFMPEG.en.md)
+
 Los scripts de este toolkit dependen de **FFmpeg**, una herramienta gratuita de código abierto para procesar audio y video.
 
 Si al ejecutar los scripts te aparece el error: `FileNotFoundError: [WinError 2]`, significa que FFmpeg no está instalado o no está en el PATH de tu sistema. Sigue estos pasos según tu sistema operativo:

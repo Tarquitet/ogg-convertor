@@ -2,6 +2,8 @@
 
 🎧 OMEGA Audio Converter (Unified Suite)
 
+**Idioma:** 🇪🇸 Español | 🇬🇧 [English](README.en.md)
+
 > **Una suite profesional de escritorio para conversión masiva, compresión y visualización de ondas de audio, optimizada para OGG Vorbis (Videojuegos y Web).**
 
 **OMEGA Audio Converter** es la evolución definitiva del antiguo _Audio Toolkit_. Fusiona 4 herramientas independientes en una sola interfaz gráfica moderna. Diseñada para desarrolladores y creadores de contenido, esta herramienta te permite visualizar cómo se comporta el audio, predecir su peso final y convertir bibliotecas enteras a formatos ligeros en segundos.
